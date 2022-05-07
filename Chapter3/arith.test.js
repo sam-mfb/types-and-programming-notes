@@ -1,14 +1,13 @@
 const { arith } = require("./arith.js");
 
-const { ZERO, TRUE, FALSE, succ } = arith;
+const { zero, TRUE, FALSE, succ, pred } = arith;
 
 it.each(arith.PRIMITIVES)("axiom1 inclusion: %s", (primitive) => {
-  expect(arith.axiom1.contains(primitive)).toBe(true);
+  expect(arith.axioms.contains(primitive)).toBe(true);
 });
 
 it.each([
   new Set().add(1),
-  0,
   true,
   false,
   "hi",
@@ -17,13 +16,10 @@ it.each([
   null,
   undefined,
   () => {},
-])("axiom1 exclusion: %s", (primitive) => {
-  expect(arith.axiom1.contains(primitive)).toBe(false);
+])("axioms exclusion: %s", (primitive) => {
+  expect(arith.axioms.contains(primitive)).toBe(false);
 });
 
-it("counting", () => {
-  const one = succ(ZERO);
-  const two = succ(one);
-  const three = succ(two);
-  console.log({ one }, { two }, { three });
+it("inSet", () => {
+  console.log(arith.inSet(3));
 });

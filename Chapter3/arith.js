@@ -7,27 +7,34 @@ class PredicateSet {
 
 const isSet = (x) => x.constructor.name === "Set";
 
-const ZERO = new Set();
+const zero = 0;
 const TRUE = Symbol("true");
 const FALSE = Symbol("false");
 
-const PRIMITIVES = [ZERO, TRUE, FALSE];
+const PRIMITIVES = [zero, TRUE, FALSE];
 
-const axiom1 = new PredicateSet((x) => PRIMITIVES.includes(x));
+const axioms = new PredicateSet((x) => PRIMITIVES.includes(x));
 
-const succ = (x) => {
-  if (!isSet(x)) throw new Error("Must be a set");
-  return new Set(x).add(new Set(x));
-};
+const succ = (x) => x + 1;
+
 const pred = (x) => x - 1;
-const isZero = (x) => x === ZERO;
+
+const inSet = (x) => {
+  if (x < -500 || x > 500) return false;
+  if (axioms.contains(x)) return true;
+  if (inSet(succ(x))) return true;
+  if (inSet(pred(x))) return true;
+};
+
+const isZero = (x) => x === zero;
 
 exports.arith = {
-  ZERO,
+  zero,
   TRUE,
   FALSE,
   PRIMITIVES,
   succ,
   pred,
-  axiom1,
+  axioms,
+  inSet,
 };
