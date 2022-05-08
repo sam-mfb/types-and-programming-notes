@@ -1,10 +1,8 @@
-const { arith } = require("./arith.js");
+import { CONSTANTS, axioms, sGenerator, sSize } from "./arith"
 
-const { zero, TRUE, FALSE, succ, pred } = arith;
-
-it.each(arith.PRIMITIVES)("axiom1 inclusion: %s", (primitive) => {
-  expect(arith.axioms.contains(primitive)).toBe(true);
-});
+it.each([...CONSTANTS])("axiom1 inclusion: %s", primitive => {
+  expect(axioms.contains(primitive)).toBe(true)
+})
 
 it.each([
   new Set().add(1),
@@ -15,11 +13,16 @@ it.each([
   {},
   null,
   undefined,
-  () => {},
-])("axioms exclusion: %s", (primitive) => {
-  expect(arith.axioms.contains(primitive)).toBe(false);
-});
+  () => {}
+])("axioms exclusion: %s", primitive => {
+  expect(axioms.contains(primitive)).toBe(false)
+})
 
-it("inSet", () => {
-  console.log(arith.inSet(3));
-});
+it("generate terms", () => {
+  let s1 = sGenerator(new Set())
+  expect(s1.size).toBe(sSize(new Set()))
+  let s2 = sGenerator(s1)
+  expect(s2.size).toBe(39)
+  let s3 = sGenerator(s2)
+  expect(s3.size).toBe(59439)
+})
