@@ -50,3 +50,15 @@ public func eval1(_ t: Term)throws -> Term {
         throw Exception.NoRuleApplies
     }
 }
+
+func eval(_ t: Term)->Term {
+    var t1:Term = t
+    do {
+        while true {
+            t1 = try eval1(t1)
+        }
+    } catch {
+        return t1
+    }
+    return t1
+}
