@@ -31,5 +31,18 @@
 			<integer>1</integer>
 		</dict>
 	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>Chapter4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>Chapter4Tests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>
