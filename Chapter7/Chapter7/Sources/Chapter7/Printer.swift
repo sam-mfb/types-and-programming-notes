@@ -1,4 +1,4 @@
-func printTerm(_ term:Term, inContext context:Context)->String {
+public func printTerm(_ term:Term, inContext context:Context)->String {
     switch term {
     case let .tmVar(_, idx, ctxCheck):
         if(context.length == ctxCheck) {
@@ -8,7 +8,7 @@ func printTerm(_ term:Term, inContext context:Context)->String {
         }
     case let .tmAbs(_, hint, t1):
         let (newName, newCtx) = freshName(hint: hint, context: context)
-        return "λ." + newName + "." + printTerm(t1, inContext: newCtx)
+        return "(λ." + newName + "." + printTerm(t1, inContext: newCtx) + ")"
     case let .tmApp(_, t1, t2):
         return printTerm(t1,inContext: context) + printTerm(t2, inContext: context)
     }
