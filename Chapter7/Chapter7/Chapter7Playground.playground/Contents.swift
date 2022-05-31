@@ -26,3 +26,7 @@ printTerm(ncTerm, inContext: blankCtx)
 let ncAbsTerm = Term.tmAbs(.blank, "a", ncTerm)
 printTerm(ncAbsTerm, inContext: blankCtx)
 
+let zTerm = Term.tmVar(.blank, 0, 1)
+let shifted = shiftTerm(zTerm,by:1)
+printTerm(shifted, inContext: .init(["x","y"]))
+
