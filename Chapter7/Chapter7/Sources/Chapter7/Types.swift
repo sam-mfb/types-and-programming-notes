@@ -31,7 +31,7 @@ public struct Context {
         ctx = temp
     }
     
-    var length:Int { ctx.count }
+    public var length:Int { ctx.count }
     
     func name(from index:Int)->String {
         if(index<ctx.count) {

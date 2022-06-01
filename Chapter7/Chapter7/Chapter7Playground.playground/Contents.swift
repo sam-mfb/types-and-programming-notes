@@ -9,12 +9,6 @@ let absTerm:Term = .tmAbs(.blank, "x", varTerm)
 
 printTerm(absTerm, inContext: context)
 
+let absTerm2:Term = .tmAbs(.blank, "y", .tmApp(.blank, varTerm, varTerm))
 
-let context2:Context = Context(["a"])
-let var2Term:Term = .tmVar(.blank, 0, 1)
-
-let appTerm:Term = .tmApp(.blank, absTerm, var2Term)
-
-printTerm(appTerm, inContext: context2)
-
-printTerm(eval(appTerm, ctx:context2), inContext: context2)
+printTerm(termSubstTop(absTerm, with: .tmApp(.blank, varTerm, varTerm)), inContext: Context(["a"]))

@@ -4,7 +4,7 @@ public func printTerm(_ term:Term, inContext context:Context)->String {
         if(context.length == ctxCheck) {
             return context.name(from: idx)
         } else {
-            return "Bad index"
+            return "Bad index. Check: \(ctxCheck) Length: \(context.length)"
         }
     case let .tmAbs(_, hint, t1):
         let (newName, newCtx) = freshName(hint: hint, context: context)

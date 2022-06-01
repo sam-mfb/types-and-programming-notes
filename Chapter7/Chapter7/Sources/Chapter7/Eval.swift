@@ -66,7 +66,7 @@ func eval1(_ term:Term, ctx: Context) throws -> Term {
     switch term {
         // beta-reduction
     case let .tmApp(_, .tmAbs(_,_,t12), v2) where isVal(v2):
-        return termSubstTop(v2, with: t12)
+        return termSubstTop(t12, with: v2)
         //further evaluation of t2
     case let .tmApp(fi, v1, t2) where isVal(v1):
         return .tmApp(fi, v1, try eval1(t2,ctx:ctx))

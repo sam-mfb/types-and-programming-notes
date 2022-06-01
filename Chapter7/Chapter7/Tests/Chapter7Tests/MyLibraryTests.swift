@@ -3,6 +3,14 @@ import XCTest
 
 final class MyLibraryTests: XCTestCase {
     func testExample() throws {
+        let varTerm:Term = .tmVar(.blank, 0, 0)
+
+        let absTerm:Term = .tmAbs(.blank, "x", varTerm)
+        
+        let appTerm:Term = .tmApp(.blank, varTerm, varTerm)
+
+        let newTerm = (termSubstTop(absTerm, with: appTerm))
+
         // XCTAssertEqual()
     }
 }
