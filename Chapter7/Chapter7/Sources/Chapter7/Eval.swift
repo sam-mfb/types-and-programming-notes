@@ -42,9 +42,48 @@ public func termSubst(_ term:Term, sub j:Int, with s:Term)->Term{
     return walk(term,c:0)
 }
 
-// beta reduction 
+// beta reduction
 public func termSubstTop(_ term:Term, with s:Term)->Term {
     let shiftedS = termShift(s, by: 1)
     let subbedTerm = termSubst(term, sub: 0, with: shiftedS)
     return termShift(subbedTerm, by: -1)
+}
+
+public func isVal(_ term:Term)->Bool {
+    switch term {
+    case .tmAbs(_, _, _):
+        return true
+    default:
+        return false
+    }
+}
+
+public enum EvalError: Error {
+    case noRuleApplies
+}
+
+func eval1(_ term:Term, ctx: Context) throws -> Term {
+    switch term {
+        // beta-reduction
+    case let .tmApp(_, .tmAbs(_,_,t12), v2) where isVal(v2):
+        return termSubstTop(v2, with: t12)
+        //further evaluation of t2
+    case let .tmApp(fi, v1, t2) where isVal(v1):
+        return .tmApp(fi, v1, try eval1(t2,ctx:ctx))
+        //further evalution of t1
+    case let .tmApp(fi,t1,t2):
+        return .tmApp(fi, try eval1(t1,ctx:ctx), t2)
+    default:
+        throw EvalError.noRuleApplies
+    }
+}
+
+public func eval(_ term: Term, ctx: Context) -> Term {
+    do {
+        let t1 = try eval1(term, ctx:ctx)
+        return eval(t1, ctx:ctx)
+    }
+    catch {
+        return term
+    }
 }
