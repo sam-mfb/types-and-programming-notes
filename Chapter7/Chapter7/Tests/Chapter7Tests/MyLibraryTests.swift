@@ -9,7 +9,7 @@ final class MyLibraryTests: XCTestCase {
         
         let appTerm:Term = .tmApp(.blank, varTerm, varTerm)
 
-        let newTerm = (termSubstTop(absTerm, with: appTerm))
+        (termSubstTop(absTerm, with: appTerm))
 
         // XCTAssertEqual()
     }

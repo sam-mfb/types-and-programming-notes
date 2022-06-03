@@ -57,3 +57,7 @@ public enum Term {
 public extension FileInfo {
     static let blank = FileInfo(fileName: "", line: 0, position: 0)
 }
+
+public extension Context {
+    static let empty = Context([])
+}

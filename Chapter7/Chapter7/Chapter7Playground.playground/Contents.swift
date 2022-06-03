@@ -8,15 +8,15 @@ printTerm(varTerm, inContext: context)
 
 let identityTerm:Term = .tmAbs(.blank, "x", varTerm)
 
-printTerm(identityTerm, inContext: Context([]))
+printTerm(identityTerm, inContext: .empty)
 
 let absTerm:Term = .tmAbs(.blank, "x", .tmApp(.blank,varTerm,varTerm))
 
-printTerm(absTerm, inContext: Context([]))
+printTerm(absTerm, inContext: .empty)
 
 let appTerm = Term.tmApp(.blank, absTerm, identityTerm)
 
-printTerm(appTerm, inContext: Context([]))
+printTerm(appTerm, inContext: .empty)
 
-printTerm(eval(appTerm,ctx:Context([])),inContext: Context([]))
+printTerm(eval(appTerm,ctx:.empty),inContext: .empty)
 
