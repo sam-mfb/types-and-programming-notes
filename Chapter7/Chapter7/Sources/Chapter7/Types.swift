@@ -27,7 +27,7 @@ public struct Context {
     
     public init(_ context:Context, with newName: String) {
         var temp = context.ctx
-        temp.append((newName,Binding()))
+        temp.insert((newName,Binding()), at:0)
         ctx = temp
     }
     

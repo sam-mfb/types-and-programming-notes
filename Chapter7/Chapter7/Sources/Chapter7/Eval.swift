@@ -15,7 +15,7 @@ public func termShift(_ term:Term, by d: Int)->Term {
         switch term {
         case let .tmVar(fi, k, contextLength):
             let shiftedK = k<c ? k : k + d
-            return Term.tmVar(fi, shiftedK, contextLength+1)
+            return Term.tmVar(fi, shiftedK, contextLength+d)
         case let .tmAbs(fi, hint, t1):
             return Term.tmAbs(fi, hint, walk(t1, c:c+1))
         case let .tmApp(fi, t1, t2):
